@@ -44,4 +44,33 @@ public class FuncionarioDAO {
         }
         return dados;
     }
+    public int listarFuncionarios(){
+        
+        int total = 0;
+        
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("select count(*) as total FROM funcionario");
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+            
+        }catch(SQLException e){
+         e.printStackTrace();
+        }
+        return total;
+    }
+
+    public List<FuncionarioBean> listarfuncionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int numFuncionarios() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
