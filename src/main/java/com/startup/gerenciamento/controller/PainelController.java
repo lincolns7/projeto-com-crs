@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -21,15 +22,15 @@ public class PainelController {
     
     @GetMapping("/funcionarios")
     public String funcionarios(Model model){
-        List<FuncionarioBean> lista = d.listarfuncionarios();
+        List<FuncionarioBean> lista = d.lerTodos();
         model.addAttribute("lista",lista);
         return "funcionarios";
     }
     
     @GetMapping("/painel")
-    public String painel(Model model){
-        int lista = d.numFuncionarios();
-        model.addAttribute("total",lista);
-        return "painel";
+    public String perfil(@RequestParam int id, Model model){
+        FuncionarioBean func = d.listarFuncionarios();
+        model.addAttribute("funcionario",func);
+        return "perfil";
     }
 }

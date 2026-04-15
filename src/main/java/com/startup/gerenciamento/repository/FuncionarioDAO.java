@@ -44,8 +44,8 @@ public class FuncionarioDAO {
         }
         return dados;
     }
-    public int listarFuncionarios(){
-        
+    public int listarFuncionarios(int id){
+        FuncionarioBean funcionario = new FuncionarioBean();
         int total = 0;
         
         try {
@@ -54,10 +54,16 @@ public class FuncionarioDAO {
             ResultSet rs = null;
             
             stmt = conn.prepareStatement("select count(*) as total FROM funcionario");
+            stmt.setInt(1,id);
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                total = rs.getInt("total");
+                funcionario.setId(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCargo(rs.getString("cargo"));
+                funcionario.setDepartamento(rs.getString("departamento"));
+                funcionario.setEmail(rs.getString("email"));
+                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
             }
             
         }catch(SQLException e){
@@ -66,11 +72,4 @@ public class FuncionarioDAO {
         return total;
     }
 
-    public List<FuncionarioBean> listarfuncionarios() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int numFuncionarios() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

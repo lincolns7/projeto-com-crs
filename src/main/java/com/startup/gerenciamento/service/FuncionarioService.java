@@ -23,4 +23,5 @@ public class FuncionarioService {
     public List<FuncionarioBean> lerTodos(){
         return repository.lerTodos();
     }
+    
 }
