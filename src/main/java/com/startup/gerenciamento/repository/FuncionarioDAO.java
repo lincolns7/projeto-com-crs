@@ -59,17 +59,55 @@ public class FuncionarioDAO {
             
             if(rs.next()){
                 funcionario.setId(rs.getInt("id"));
-                funcionario.setNome(rs.getString("nome"));
-                funcionario.setCargo(rs.getString("cargo"));
-                funcionario.setDepartamento(rs.getString("departamento"));
-                funcionario.setEmail(rs.getString("email"));
-                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
             }
             
         }catch(SQLException e){
          e.printStackTrace();
         }
         return total;
+    }
+    public FuncionarioBean lerPorId(int id) {
+        FuncionarioBean funcionario = new FuncionarioBean();
+        try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("SELECT * FROM funcionario WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            
+            if(rs.next()) {
+                funcionario.setId(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCargo(rs.getString("cargo"));
+                funcionario.setDepartamento(rs.getString("departamento"));
+                funcionario.setEmail(rs.getString("email"));
+                funcionario.setData_contratacao(rs.getDate("data_contratacao"));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return funcionario;
+    }
+    
+    public void salvar(FuncionarioBean funcionario){
+       
+         try {
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+           
+            stmt = conn.prepareStatement("UPDATE funcionario SET nome=?, cargo=?, departamento=?, email=? WHERE id = ?");
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getCargo());
+            stmt.setString(3, funcionario.getDepartamento());
+            stmt.setString(4, funcionario.getEmail());
+            stmt.setInt(5, funcionario.getId());
+            stmt.executeUpdate();
+           
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

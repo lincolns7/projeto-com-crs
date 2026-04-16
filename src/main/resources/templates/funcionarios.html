@@ -11,9 +11,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <header>
-            <nav>
-                <a href ="/portal"> Voltar para o portal </a>
-            </nav>
              <h1>Lista de funcionarios na empresa</h1>
         </header>
         <main>
@@ -34,8 +31,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <td th:text= "${f.cargo}" ></td>
                     <td th:text= "${f.departamento}" ></td>
                     <td th:text= "${f.email}" ></td>
-                    <td th:text= "${f.dataContratacao}" ></td>
-                    <td th:text= "{/perfil(id=${f.id}}">Editar<</td>
+                    <td th:text= "${f.data_contratacao}" ></td>
+                    <td><a th:href= "@{/perfil(id=${f.id})}">Editar</a></td>
                 </tr>
             </table>
         </main>

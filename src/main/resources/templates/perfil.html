@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org&quot";>
+<head>
+        <title>Perfil</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <nav>
+            <a href ="/funcionarios"> Voltar funcionarios </a>
+        </nav>
+        <main>
+            <h2>Editar Dados</h2>
+            <form th:action="@{/salvar}" th:object="${funcionario}" method="post">
+                <label>Nome:</label>
+                <input type="text" th:field="*{nome}" />
+                <br /><br />
+                <label>Cargo:</label>
+                <input type="text" th:field="*{cargo}" />
+                <br /><br />
+                <label>Departamento: </label>
+                <input type="text" th:field="*{departamento}" />
+                <br/><br/>
+                <label>E-mail: </label>
+                <input type="email" th:field="*{email}" />
+                <br/><br/>
+                <button type="submit">Salvar</button>
+                <input type="hidden" th:field="*{id}" />
+            </form>
+        </main>  
+    </body>
+    
+</html>
